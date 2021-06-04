@@ -52,5 +52,15 @@ namespace PaymentGateway.UnitTests
         {
             Assert.Throws<ArgumentException>(() => new CardNumber(cardNumber));
         }
+
+        [Theory]
+        [InlineData("4953089013607", "*********3607")]
+        [InlineData("6479044318331490", "************1490")]
+        public void MaskedValueReturnsMaskedCardNumber(string cardNumber, string expectedMaskedNumber)
+        {
+            var result = new CardNumber(cardNumber);
+
+            result.MaskedValue.Value.ShouldBe(expectedMaskedNumber);
+        }
     }
 }

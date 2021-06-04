@@ -29,7 +29,7 @@ namespace PaymentGateway.UnitTests
         public async Task GetPaymentReturnsDataWhenPaymentExists()
         {
             var reference = Guid.NewGuid().ToString();
-            var paymentDetails = new PaymentDetails(reference,
+            var paymentDetails = new PaymentDetails(reference, PaymentStatus.Success,
                 TestHelper.GetPaymentCardDetails(), Currency.GBP, 9.99m);
             await _subject.AddPayment(paymentDetails);
 
@@ -42,7 +42,7 @@ namespace PaymentGateway.UnitTests
         public async Task AddPaymentThrowsExceptionWhenReferenceAlreadyExists()
         {
             var reference = Guid.NewGuid().ToString();
-            var paymentDetails = new PaymentDetails(reference,
+            var paymentDetails = new PaymentDetails(reference, PaymentStatus.Success,
                 TestHelper.GetPaymentCardDetails(), Currency.GBP, 9.99m);
             await _subject.AddPayment(paymentDetails);
 

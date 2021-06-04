@@ -141,19 +141,22 @@ namespace PaymentGateway.UnitTests
         public async Task GetPaymentReturnsPaymentWhenRepositoryReturnsData()
         {
             var paymentCardDetails = TestHelper.GetPaymentCardDetails();
+            var paymentDetails = new PaymentDetails(PaymentReference,
+                PaymentStatus.Success, paymentCardDetails, Currency.GBP, 9.99m);
             _paymentRepository
                 .Setup(x => x.GetPayment(PaymentReference))
-                .ReturnsAsync(new PaymentDetails(PaymentReference, paymentCardDetails, Currency.GBP, 9.99m));
+                .ReturnsAsync(paymentDetails);
 
             var result = await _subject.GetPayment(PaymentReference);
 
             result.ShouldNotBeNull();
-            result.Reference.ShouldBe(PaymentReference);
+            result.Reference.ShouldBe(paymentDetails.Reference);
+            result.Status.ShouldBe(paymentDetails.Status);
             result.CardDetails.CardNumber.ShouldBe(paymentCardDetails.CardNumber);
             result.CardDetails.CardExpiry.ShouldBe(paymentCardDetails.CardExpiry);
             result.CardDetails.Cvv.ShouldBe(paymentCardDetails.Cvv);
-            result.Currency.ShouldBe(Currency.GBP);
-            result.Amount.ShouldBe(9.99m);
+            result.Currency.ShouldBe(paymentDetails.Currency);
+            result.Amount.ShouldBe(paymentDetails.Amount);
         }
 
         [Fact]

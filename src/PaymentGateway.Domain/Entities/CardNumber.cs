@@ -10,6 +10,9 @@ namespace PaymentGateway.Domain.Entities
 
         public string Value { get; }
 
+        public Lazy<string> MaskedValue =>
+            new Lazy<string>(new string('*', Value.Length - 4) + Value[^4..]);
+
         public CardNumber(string cardNumber)
         {
             if (!IsValid(cardNumber))

@@ -19,7 +19,7 @@ namespace PaymentGateway.UnitTests
 
         public GetPaymentDetailsQueryHandlerTests()
         {
-            _paymentDetails = new PaymentDetails(PaymentReference,
+            _paymentDetails = new PaymentDetails(PaymentReference, PaymentStatus.Success,
                 TestHelper.GetPaymentCardDetails(), Currency.EUR, 7363.93m);
             _paymentService = new Mock<IPaymentService>();
             _paymentService
@@ -49,6 +49,7 @@ namespace PaymentGateway.UnitTests
 
             result.ShouldNotBeNull();
             result.Reference.ShouldBe(_paymentDetails.Reference);
+            result.Status.ShouldBe(_paymentDetails.Status);
             result.CardDetails.CardNumber.ShouldBe(_paymentDetails.CardDetails.CardNumber);
             result.CardDetails.CardExpiry.ShouldBe(_paymentDetails.CardDetails.CardExpiry);
             result.CardDetails.Cvv.ShouldBe(_paymentDetails.CardDetails.Cvv);

@@ -45,7 +45,8 @@ namespace PaymentGateway.Domain.Services
         private Task PersistPaymentDetails(PaymentProcessingResult paymentProcessingResult,
             PaymentCardDetails paymentCardDetails, Currency currency, decimal amount)
         {
-            var paymentDetails = new PaymentDetails(paymentProcessingResult.Reference, paymentCardDetails, currency, amount);
+            var paymentDetails = new PaymentDetails(paymentProcessingResult.Reference,
+                PaymentStatus.Success, paymentCardDetails, currency, amount);
             return _paymentRepository.AddPayment(paymentDetails);
         }
 
