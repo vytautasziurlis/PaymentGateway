@@ -43,4 +43,4 @@ The following valid card number can be used for testing purposes: `4689387567825
 * Refactor CardNumber and CardCvv classes to make them more efficient
 * Review Luhn check NuGet package and implement more efficient algorithm if required
 * Add CancellationToken support
-* Implement API client
+* Refactor API client unit tests to make them more readable
