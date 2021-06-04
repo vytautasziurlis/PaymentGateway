@@ -40,3 +40,4 @@ The following valid card number can be used for testing purposes: `4689387567825
 * Add validation into MediatR pipeline
 * Improve card number masking logic
 * Add CancellationToken support
+* Implement API client

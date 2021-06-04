@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PaymentGateway.API.Mappings;
+using PaymentGateway.API.Mapping;
 using PaymentGateway.API.Models;
 using PaymentGateway.Domain.Queries;
 

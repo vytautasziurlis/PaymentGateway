@@ -1,5 +1,5 @@
 ﻿using System;
-using PaymentGateway.API.Mappings;
+using PaymentGateway.API.Mapping;
 using PaymentGateway.API.Models;
 using PaymentGateway.Domain.Entities;
 using Shouldly;

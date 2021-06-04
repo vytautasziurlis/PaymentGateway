@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using PaymentGateway.API.Controllers;
-using PaymentGateway.API.Mappings;
+using PaymentGateway.API.Mapping;
 using PaymentGateway.API.Models;
 using PaymentGateway.Domain.Commands;
 using PaymentGateway.Domain.Entities;

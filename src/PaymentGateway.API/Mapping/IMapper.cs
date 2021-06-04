@@ -2,7 +2,7 @@
 using PaymentGateway.Domain.Commands;
 using PaymentGateway.Domain.Entities;
 
-namespace PaymentGateway.API.Mappings
+namespace PaymentGateway.API.Mapping
 {
     public interface IMapper
     {

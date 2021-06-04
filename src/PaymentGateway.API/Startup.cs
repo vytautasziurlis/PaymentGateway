@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using PaymentGateway.API.Mappings;
+using PaymentGateway.API.Mapping;
 using PaymentGateway.API.Models;
 using PaymentGateway.API.Validation;
 using PaymentGateway.Domain;
