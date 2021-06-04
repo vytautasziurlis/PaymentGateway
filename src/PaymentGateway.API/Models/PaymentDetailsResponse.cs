@@ -8,22 +8,22 @@ namespace PaymentGateway.API.Models
     {
         [Required]
         [JsonPropertyName("reference")]
-        public string Reference { get; set; } = "";
+        public string Reference { get; init; } = "";
 
         [Required]
         [JsonPropertyName("status")]
-        public PaymentStatus Status { get; set; }
+        public PaymentStatus Status { get; init; }
 
         [Required]
         [JsonPropertyName("paymentCardDetails")]
-        public PaymentCardDetailsResponse? PaymentCardDetails { get; set; }
+        public PaymentCardDetailsResponse? PaymentCardDetails { get; init; }
 
         [Required]
         [JsonPropertyName("currency")]
-        public Currency Currency { get; set; }
+        public Currency Currency { get; init; }
 
         [Required]
         [JsonPropertyName("amount")]
-        public int Amount { get; set; }
+        public int Amount { get; init; }
     }
 }

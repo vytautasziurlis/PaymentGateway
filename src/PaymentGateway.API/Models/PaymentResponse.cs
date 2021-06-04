@@ -8,10 +8,10 @@ namespace PaymentGateway.API.Models
     {
         [Required]
         [JsonPropertyName("reference")]
-        public string Reference { get; set; } = "";
+        public string Reference { get; init; } = "";
 
         [Required]
         [JsonPropertyName("status")]
-        public PaymentStatus Status { get; set; }
+        public PaymentStatus Status { get; init; }
     }
 }

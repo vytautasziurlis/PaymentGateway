@@ -35,7 +35,7 @@ The following valid card number can be used for testing purposes: `4689387567825
 # TODO
 
 * Add authentication support. Once authentication is implemented - update domain logic to ensure that merchants can only get details of the payment they created
-* Add support for data encryption and replace mock repository
+* Add support for data encryption and replace mock in-memory repository
 * Replace manual mapper with more efficient dynamic mapper (e.g. Mapster)
 * Add validation into MediatR pipeline
 * Improve card number masking logic
