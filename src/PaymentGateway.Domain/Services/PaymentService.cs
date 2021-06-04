@@ -28,6 +28,7 @@ namespace PaymentGateway.Domain.Services
             Currency currency, decimal amount)
         {
             ValidatePaymentCard(paymentCardDetails);
+            ValidatePaymentAmount(amount);
 
             var paymentProcessingResult = await _bankService.ProcessPayment(paymentCardDetails,
                 currency, amount);
@@ -57,6 +58,15 @@ namespace PaymentGateway.Domain.Services
                 _logger.LogWarning("Invalid card expiry: {Year}/{Month}",
                     paymentCardDetails.CardExpiry.Year, paymentCardDetails.CardExpiry.Month);
                 throw new PaymentCardExpiredException();
+            }
+        }
+
+        private void ValidatePaymentAmount(decimal amount)
+        {
+            if (amount <= 0)
+            {
+                _logger.LogWarning("Invalid payment amount: {Amount}", amount);
+                throw new InvalidPaymentAmountException();
             }
         }
 

@@ -101,6 +101,15 @@ namespace PaymentGateway.UnitTests.Services
         }
 
         [Fact]
+        public async Task ProcessPaymentThrowsExceptionWhenAmountIsInvalid()
+        {
+            var paymentCardDetails = TestHelper.GetPaymentCardDetails();
+
+            await Assert.ThrowsAsync<InvalidPaymentAmountException>(() =>
+                _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 0));
+        }
+
+        [Fact]
         public async Task ProcessPaymentThrowsExceptionWhenBankServiceThrows()
         {
             _bankService
