@@ -31,7 +31,7 @@ namespace PaymentGateway.UnitTests
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_paymentProcessingResult);
             _paymentDetails = new PaymentDetails("reference", PaymentStatus.Success,
-                TestHelper.GetPaymentCardDetails(), Currency.EUR, 361.38m);
+                TestHelper.GetPaymentCardDetails(), Currency.EUR, 36138);
             _mediator
                 .Setup(x => x.Send(It.IsAny<GetPaymentDetailsQuery>(),
                     It.IsAny<CancellationToken>()))
@@ -143,7 +143,7 @@ namespace PaymentGateway.UnitTests
                     Cvv = cardDetails.Cvv.Value
                 },
                 Currency = Currency.USD,
-                Amount = 421.97m
+                Amount = 42197
             };
         }
     }

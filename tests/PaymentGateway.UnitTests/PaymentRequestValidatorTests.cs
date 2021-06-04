@@ -116,11 +116,13 @@ namespace PaymentGateway.UnitTests
             result.ShouldHaveValidationErrorFor(nameof(request.Amount));
         }
 
-        [Fact]
-        public void ValidationFailsWhenAmountIsNegative()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void ValidationFailsWhenAmountIsNotValid(int amount)
         {
             var request = GetValidRequest();
-            request.Amount = -0.01m;
+            request.Amount = amount;
 
             var result = _subject.TestValidate(request);
 
@@ -138,7 +140,7 @@ namespace PaymentGateway.UnitTests
                     Cvv = "123"
                 },
                 Currency = Currency.EUR,
-                Amount = 838.98m
+                Amount = 83898
             };
     }
 }

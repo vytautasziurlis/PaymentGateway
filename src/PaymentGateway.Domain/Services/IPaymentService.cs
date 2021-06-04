@@ -6,7 +6,7 @@ namespace PaymentGateway.Domain.Services
     public interface IPaymentService
     {
         Task<PaymentProcessingResult> ProcessPayment(PaymentCardDetails paymentCardDetails,
-            Currency currency, decimal amount);
+            Currency currency, int amount);
 
         Task<PaymentDetails?> GetPayment(string paymentReference);
     }

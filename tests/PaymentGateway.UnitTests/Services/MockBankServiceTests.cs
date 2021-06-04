@@ -16,7 +16,7 @@ namespace PaymentGateway.UnitTests.Services
             var cardDetails = new PaymentCardDetails(new CardNumber(TestHelper.ValidCardNumber),
                 new CardExpiry(2021, 6), new CardCvv("123"));
 
-            var result = await _subject.ProcessPayment(cardDetails, Currency.GBP, 9.99m);
+            var result = await _subject.ProcessPayment(cardDetails, Currency.GBP, 999);
 
             result.Status.ShouldBe(PaymentStatus.Success);
         }
@@ -27,7 +27,7 @@ namespace PaymentGateway.UnitTests.Services
             var cardDetails = new PaymentCardDetails(new CardNumber("5201294442453002"),
                 new CardExpiry(2021, 6), new CardCvv("123"));
 
-            var result = await _subject.ProcessPayment(cardDetails, Currency.GBP, 9.99m);
+            var result = await _subject.ProcessPayment(cardDetails, Currency.GBP, 999);
 
             result.Status.ShouldBe(PaymentStatus.Failure);
         }

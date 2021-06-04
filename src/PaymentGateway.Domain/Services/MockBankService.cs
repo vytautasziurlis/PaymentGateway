@@ -7,7 +7,7 @@ namespace PaymentGateway.Domain.Services
     public class MockBankService : IBankService
     {
         public Task<PaymentProcessingResult> ProcessPayment(PaymentCardDetails paymentCardDetails,
-            Currency currency, decimal amount)
+            Currency currency, int amount)
         {
             var paymentReference = Guid.NewGuid().ToString();
 

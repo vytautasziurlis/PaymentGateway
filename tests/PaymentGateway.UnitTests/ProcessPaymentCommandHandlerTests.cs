@@ -22,7 +22,7 @@ namespace PaymentGateway.UnitTests
             _paymentService = new Mock<IPaymentService>();
             _paymentService
                 .Setup(x => x.ProcessPayment(It.IsAny<PaymentCardDetails>(),
-                    It.IsAny<Currency>(), It.IsAny<decimal>()))
+                    It.IsAny<Currency>(), It.IsAny<int>()))
                 .ReturnsAsync(_paymentProcessingResult);
 
             _subject = new ProcessPaymentCommandHandler(_paymentService.Object);
@@ -32,12 +32,12 @@ namespace PaymentGateway.UnitTests
         public async Task HandleCallsPaymentService()
         {
             var command = new ProcessPaymentCommand(TestHelper.GetPaymentCardDetails(),
-                Currency.USD, 42.01m);
+                Currency.USD, 4201);
 
             await _subject.Handle(command, CancellationToken.None);
 
             _paymentService.Verify(x => x.ProcessPayment(It.IsAny<PaymentCardDetails>(),
-                    It.IsAny<Currency>(), It.IsAny<decimal>()),
+                    It.IsAny<Currency>(), It.IsAny<int>()),
                 Times.Once);
         }
 
@@ -46,11 +46,11 @@ namespace PaymentGateway.UnitTests
         {
             _paymentService
                 .Setup(x => x.ProcessPayment(It.IsAny<PaymentCardDetails>(),
-                    It.IsAny<Currency>(), It.IsAny<decimal>()))
+                    It.IsAny<Currency>(), It.IsAny<int>()))
                 .ReturnsAsync(new PaymentProcessingResult("ref", PaymentStatus.Success));
 
             var command = new ProcessPaymentCommand(TestHelper.GetPaymentCardDetails(),
-                Currency.USD, 42.01m);
+                Currency.USD, 4201);
 
             var result = await _subject.Handle(command, CancellationToken.None);
 

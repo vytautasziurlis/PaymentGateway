@@ -10,10 +10,10 @@
 
         public Currency Currency { get; }
 
-        public decimal Amount { get; }
+        public int Amount { get; }
 
         public PaymentDetails(string reference, PaymentStatus status,
-            PaymentCardDetails cardDetails, Currency currency, decimal amount)
+            PaymentCardDetails cardDetails, Currency currency, int amount)
         {
             Reference = reference;
             Status = status;

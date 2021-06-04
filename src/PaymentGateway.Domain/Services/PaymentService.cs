@@ -25,7 +25,7 @@ namespace PaymentGateway.Domain.Services
         }
 
         public async Task<PaymentProcessingResult> ProcessPayment(PaymentCardDetails paymentCardDetails,
-            Currency currency, decimal amount)
+            Currency currency, int amount)
         {
             ValidatePaymentCard(paymentCardDetails);
             ValidatePaymentAmount(amount);
@@ -44,7 +44,7 @@ namespace PaymentGateway.Domain.Services
         }
 
         private Task PersistPaymentDetails(PaymentProcessingResult paymentProcessingResult,
-            PaymentCardDetails paymentCardDetails, Currency currency, decimal amount)
+            PaymentCardDetails paymentCardDetails, Currency currency, int amount)
         {
             var paymentDetails = new PaymentDetails(paymentProcessingResult.Reference,
                 paymentProcessingResult.Status, paymentCardDetails, currency, amount);
@@ -61,7 +61,7 @@ namespace PaymentGateway.Domain.Services
             }
         }
 
-        private void ValidatePaymentAmount(decimal amount)
+        private void ValidatePaymentAmount(int amount)
         {
             if (amount <= 0)
             {

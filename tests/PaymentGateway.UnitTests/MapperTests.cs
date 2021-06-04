@@ -29,7 +29,7 @@ namespace PaymentGateway.UnitTests
                     Cvv = "123",
                 },
                 Currency = Currency.USD,
-                Amount = 837.94m
+                Amount = 8374
             };
 
             var command = _subject.Map(request);
@@ -49,7 +49,7 @@ namespace PaymentGateway.UnitTests
             {
                 PaymentCardDetails = null,
                 Currency = Currency.USD,
-                Amount = 837.94m
+                Amount = 83794
             };
 
             Assert.Throws<ArgumentNullException>(() => _subject.Map(request));
@@ -70,7 +70,7 @@ namespace PaymentGateway.UnitTests
         public void MapPaymentDetailsMapsToPaymentDetailsResponse()
         {
             var paymentDetails = new PaymentDetails("reference", PaymentStatus.Success,
-                TestHelper.GetPaymentCardDetails(), Currency.GBP, 847.90m);
+                TestHelper.GetPaymentCardDetails(), Currency.GBP, 84790);
 
             var response = _subject.Map(paymentDetails);
 

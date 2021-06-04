@@ -26,7 +26,7 @@ namespace PaymentGateway.UnitTests.Services
             _bankService = new Mock<IBankService>();
             _bankService
                 .Setup(x => x.ProcessPayment(It.IsAny<PaymentCardDetails>(),
-                    It.IsAny<Currency>(), It.IsAny<decimal>()))
+                    It.IsAny<Currency>(), It.IsAny<int>()))
                 .ReturnsAsync(new PaymentProcessingResult(PaymentReference, PaymentStatus.Success));
 
             _paymentRepository = new Mock<IPaymentRepository>();
@@ -45,10 +45,10 @@ namespace PaymentGateway.UnitTests.Services
         {
             var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
-            await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m);
+            await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 999);
 
             _bankService.Verify(x => x.ProcessPayment(paymentCardDetails,
-                Currency.GBP, 9.99m), Times.Once);
+                Currency.GBP, 999), Times.Once);
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace PaymentGateway.UnitTests.Services
         {
             var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
-            var result = await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m);
+            var result = await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 42);
 
             result.Reference.ShouldBe(PaymentReference);
             result.Status.ShouldBe(PaymentStatus.Success);
@@ -67,11 +67,11 @@ namespace PaymentGateway.UnitTests.Services
         {
             _bankService
                 .Setup(x => x.ProcessPayment(It.IsAny<PaymentCardDetails>(),
-                    It.IsAny<Currency>(), It.IsAny<decimal>()))
+                    It.IsAny<Currency>(), It.IsAny<int>()))
                 .ReturnsAsync(new PaymentProcessingResult(PaymentReference, PaymentStatus.Failure));
             var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
-            var result = await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m);
+            var result = await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 999);
 
             result.Reference.ShouldBe(PaymentReference);
             result.Status.ShouldBe(PaymentStatus.Failure);
@@ -82,7 +82,7 @@ namespace PaymentGateway.UnitTests.Services
         {
             var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
-            await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m);
+            await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 999);
 
             _paymentRepository.Verify(x => x.AddPayment(
                 It.Is<PaymentDetails>(payment => payment.Reference == PaymentReference)),
@@ -97,7 +97,7 @@ namespace PaymentGateway.UnitTests.Services
                 expiryMonth: lastMonth.Month);
 
             await Assert.ThrowsAsync<PaymentCardExpiredException>(() =>
-                _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m));
+                _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 999));
         }
 
         [Fact]
@@ -114,12 +114,12 @@ namespace PaymentGateway.UnitTests.Services
         {
             _bankService
                 .Setup(x => x.ProcessPayment(It.IsAny<PaymentCardDetails>(),
-                    It.IsAny<Currency>(), It.IsAny<decimal>()))
+                    It.IsAny<Currency>(), It.IsAny<int>()))
                 .ThrowsAsync(new Exception());
             var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
             await Assert.ThrowsAsync<Exception>(() =>
-                _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m));
+                _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 999));
         }
 
         [Fact]
@@ -131,7 +131,7 @@ namespace PaymentGateway.UnitTests.Services
             var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
             await Assert.ThrowsAsync<Exception>(() =>
-                _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m));
+                _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 999));
         }
 
         [Fact]
@@ -151,7 +151,7 @@ namespace PaymentGateway.UnitTests.Services
         {
             var paymentCardDetails = TestHelper.GetPaymentCardDetails();
             var paymentDetails = new PaymentDetails(PaymentReference,
-                PaymentStatus.Success, paymentCardDetails, Currency.GBP, 9.99m);
+                PaymentStatus.Success, paymentCardDetails, Currency.GBP, 999);
             _paymentRepository
                 .Setup(x => x.GetPayment(PaymentReference))
                 .ReturnsAsync(paymentDetails);

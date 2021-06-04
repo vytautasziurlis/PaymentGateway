@@ -20,7 +20,7 @@ namespace PaymentGateway.UnitTests
         public GetPaymentDetailsQueryHandlerTests()
         {
             _paymentDetails = new PaymentDetails(PaymentReference, PaymentStatus.Success,
-                TestHelper.GetPaymentCardDetails(), Currency.EUR, 7363.93m);
+                TestHelper.GetPaymentCardDetails(), Currency.EUR, 736393);
             _paymentService = new Mock<IPaymentService>();
             _paymentService
                 .Setup(x => x.GetPayment(PaymentReference))

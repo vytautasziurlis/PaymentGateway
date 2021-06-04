@@ -9,9 +9,9 @@ namespace PaymentGateway.Domain.Commands
 
         public Currency Currency { get; }
 
-        public decimal Amount { get; }
+        public int Amount { get; }
 
-        public ProcessPaymentCommand(PaymentCardDetails paymentCardDetails, Currency currency, decimal amount)
+        public ProcessPaymentCommand(PaymentCardDetails paymentCardDetails, Currency currency, int amount)
         {
             PaymentCardDetails = paymentCardDetails;
             Currency = currency;

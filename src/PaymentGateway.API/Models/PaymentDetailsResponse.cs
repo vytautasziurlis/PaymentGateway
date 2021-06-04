@@ -24,6 +24,6 @@ namespace PaymentGateway.API.Models
 
         [Required]
         [JsonPropertyName("amount")]
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
     }
 }
