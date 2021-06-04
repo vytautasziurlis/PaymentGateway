@@ -3,7 +3,7 @@ using PaymentGateway.Domain.Entities;
 using Shouldly;
 using Xunit;
 
-namespace PaymentGateway.UnitTests
+namespace PaymentGateway.UnitTests.Entities
 {
     public class PaymentCardExpiryTests
     {

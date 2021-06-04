@@ -6,7 +6,7 @@ using PaymentGateway.Domain.Persistence;
 using Shouldly;
 using Xunit;
 
-namespace PaymentGateway.UnitTests
+namespace PaymentGateway.UnitTests.Services
 {
     public class InMemoryPaymentRepositoryTests
     {

@@ -4,7 +4,7 @@ using PaymentGateway.Domain.Services;
 using Shouldly;
 using Xunit;
 
-namespace PaymentGateway.UnitTests
+namespace PaymentGateway.UnitTests.Services
 {
     public class MockBankServiceTests
     {
