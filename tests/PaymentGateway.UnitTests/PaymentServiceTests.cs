@@ -43,7 +43,7 @@ namespace PaymentGateway.UnitTests
         [Fact]
         public async Task ProcessPaymentCallsBankService()
         {
-            var paymentCardDetails = GetPaymentCardDetails();
+            var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
             await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m);
 
@@ -54,7 +54,7 @@ namespace PaymentGateway.UnitTests
         [Fact]
         public async Task ProcessPaymentReturnsSuccessWhenBankReturnsSuccess()
         {
-            var paymentCardDetails = GetPaymentCardDetails();
+            var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
             var result = await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m);
 
@@ -69,7 +69,7 @@ namespace PaymentGateway.UnitTests
                 .Setup(x => x.ProcessPayment(It.IsAny<PaymentCardDetails>(),
                     It.IsAny<Currency>(), It.IsAny<decimal>()))
                 .ReturnsAsync(new PaymentProcessingResult(PaymentReference, PaymentStatus.Failure));
-            var paymentCardDetails = GetPaymentCardDetails();
+            var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
             var result = await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m);
 
@@ -80,7 +80,7 @@ namespace PaymentGateway.UnitTests
         [Fact]
         public async Task ProcessPaymentCallsPaymentRepository()
         {
-            var paymentCardDetails = GetPaymentCardDetails();
+            var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
             await _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m);
 
@@ -93,7 +93,7 @@ namespace PaymentGateway.UnitTests
         public async Task ProcessPaymentThrowsExceptionWhenCardIsExpired()
         {
             var lastMonth = _dateTimeProvider.Object.UtcNow().AddMonths(-1);
-            var paymentCardDetails = GetPaymentCardDetails(expiryYear: lastMonth.Year,
+            var paymentCardDetails = TestHelper.GetPaymentCardDetails(expiryYear: lastMonth.Year,
                 expiryMonth: lastMonth.Month);
 
             await Assert.ThrowsAsync<PaymentCardExpiredException>(() =>
@@ -107,7 +107,7 @@ namespace PaymentGateway.UnitTests
                 .Setup(x => x.ProcessPayment(It.IsAny<PaymentCardDetails>(),
                     It.IsAny<Currency>(), It.IsAny<decimal>()))
                 .ThrowsAsync(new Exception());
-            var paymentCardDetails = GetPaymentCardDetails();
+            var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
             await Assert.ThrowsAsync<Exception>(() =>
                 _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m));
@@ -119,7 +119,7 @@ namespace PaymentGateway.UnitTests
             _paymentRepository
                 .Setup(x => x.AddPayment(It.IsAny<PaymentDetails>()))
                 .ThrowsAsync(new Exception());
-            var paymentCardDetails = GetPaymentCardDetails();
+            var paymentCardDetails = TestHelper.GetPaymentCardDetails();
 
             await Assert.ThrowsAsync<Exception>(() =>
                 _subject.ProcessPayment(paymentCardDetails, Currency.GBP, 9.99m));
@@ -140,7 +140,7 @@ namespace PaymentGateway.UnitTests
         [Fact]
         public async Task GetPaymentReturnsPaymentWhenRepositoryReturnsData()
         {
-            var paymentCardDetails = GetPaymentCardDetails();
+            var paymentCardDetails = TestHelper.GetPaymentCardDetails();
             _paymentRepository
                 .Setup(x => x.GetPayment(PaymentReference))
                 .ReturnsAsync(new PaymentDetails(PaymentReference, paymentCardDetails, Currency.GBP, 9.99m));
@@ -165,9 +165,5 @@ namespace PaymentGateway.UnitTests
 
             await Assert.ThrowsAsync<Exception>(() => _subject.GetPayment(PaymentReference));
         }
-
-        private static PaymentCardDetails GetPaymentCardDetails(int expiryYear = 2021, int expiryMonth = 6) =>
-            new PaymentCardDetails(new CardNumber(Constants.ValidCardNumber),
-                new CardExpiry(expiryYear, expiryMonth), new CardCvv("123"));
     }
 }

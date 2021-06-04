@@ -30,7 +30,7 @@ namespace PaymentGateway.UnitTests
         {
             var reference = Guid.NewGuid().ToString();
             var paymentDetails = new PaymentDetails(reference,
-                GetPaymentCardDetails(), Currency.GBP, 9.99m);
+                TestHelper.GetPaymentCardDetails(), Currency.GBP, 9.99m);
             await _subject.AddPayment(paymentDetails);
 
             var result = await _subject.GetPayment(reference);
@@ -43,14 +43,10 @@ namespace PaymentGateway.UnitTests
         {
             var reference = Guid.NewGuid().ToString();
             var paymentDetails = new PaymentDetails(reference,
-                GetPaymentCardDetails(), Currency.GBP, 9.99m);
+                TestHelper.GetPaymentCardDetails(), Currency.GBP, 9.99m);
             await _subject.AddPayment(paymentDetails);
 
             await Assert.ThrowsAsync<DuplicatePaymentReferenceException>(() => _subject.AddPayment(paymentDetails));
         }
-
-        private static PaymentCardDetails GetPaymentCardDetails() =>
-            new PaymentCardDetails(new CardNumber(Constants.ValidCardNumber),
-                new CardExpiry(DateTime.Now.Year, DateTime.Now.Month), new CardCvv("123"));
     }
 }

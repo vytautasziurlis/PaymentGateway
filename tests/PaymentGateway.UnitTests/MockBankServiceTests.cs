@@ -13,7 +13,7 @@ namespace PaymentGateway.UnitTests
         [Fact]
         public async Task ProcessPaymentReturnsSuccessWhenPaymentIsValid()
         {
-            var cardDetails = new PaymentCardDetails(new CardNumber(Constants.ValidCardNumber),
+            var cardDetails = new PaymentCardDetails(new CardNumber(TestHelper.ValidCardNumber),
                 new CardExpiry(2021, 6), new CardCvv("123"));
 
             var result = await _subject.ProcessPayment(cardDetails, Currency.GBP, 9.99m);
