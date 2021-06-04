@@ -35,9 +35,12 @@ The following valid card number can be used for testing purposes: `4689387567825
 # TODO
 
 * Add authentication support. Once authentication is implemented - update domain logic to ensure that merchants can only get details of the payment they created
-* Add support for data encryption
+* Add support for data encryption and replace mock repository
 * Replace manual mapper with more efficient dynamic mapper (e.g. Mapster)
 * Add validation into MediatR pipeline
 * Improve card number masking logic
+* Improve exception handling at the API level
+* Refactor CardNumber and CardCvv classes to make them more efficient
+* Review Luhn check NuGet package and implement more efficient algorithm if required
 * Add CancellationToken support
 * Implement API client
