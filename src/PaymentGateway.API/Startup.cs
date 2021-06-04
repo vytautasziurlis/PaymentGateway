@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PaymentGateway.API.Mappings;
+using PaymentGateway.API.Models;
+using PaymentGateway.API.Validation;
 using PaymentGateway.Domain;
 using PaymentGateway.Domain.Commands;
 using PaymentGateway.Domain.Persistence;
@@ -28,7 +32,8 @@ namespace PaymentGateway.API
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllers()
+                .AddControllers(options => options.ModelValidatorProviders.Clear())
+                .AddFluentValidation()
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -40,7 +45,8 @@ namespace PaymentGateway.API
                 .AddTransient<IBankService, MockBankService>()
                 .AddSingleton<IPaymentRepository, InMemoryPaymentRepository>()
                 .AddTransient<IMapper, Mapper>()
-                .AddTransient<IDateTimeProvider, DateTimeProvider>();
+                .AddTransient<IDateTimeProvider, DateTimeProvider>()
+                .AddTransient<IValidator<PaymentRequest>, PaymentRequestValidator>();
 
             services.AddSwaggerGen(c =>
             {

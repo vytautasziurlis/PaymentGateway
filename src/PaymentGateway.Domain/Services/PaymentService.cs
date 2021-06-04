@@ -46,7 +46,7 @@ namespace PaymentGateway.Domain.Services
             PaymentCardDetails paymentCardDetails, Currency currency, decimal amount)
         {
             var paymentDetails = new PaymentDetails(paymentProcessingResult.Reference,
-                PaymentStatus.Success, paymentCardDetails, currency, amount);
+                paymentProcessingResult.Status, paymentCardDetails, currency, amount);
             return _paymentRepository.AddPayment(paymentDetails);
         }
 
