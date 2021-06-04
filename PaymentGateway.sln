@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7A31513F-ADCE-40F0-89E9-41B935B3355C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4D36ADE2-90A6-4A34-990C-5C55F1F22727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentGateway.Domain", "src\PaymentGateway.Domain\PaymentGateway.Domain.csproj", "{765E2A3B-3B13-4B12-992F-EF6993F79244}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentGateway.UnitTests", "tests\PaymentGateway.UnitTests\PaymentGateway.UnitTests.csproj", "{A12FEAFC-3767-4578-9863-03C33D6F4F82}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{765E2A3B-3B13-4B12-992F-EF6993F79244} = {7A31513F-ADCE-40F0-89E9-41B935B3355C}
+		{A12FEAFC-3767-4578-9863-03C33D6F4F82} = {4D36ADE2-90A6-4A34-990C-5C55F1F22727}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{765E2A3B-3B13-4B12-992F-EF6993F79244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765E2A3B-3B13-4B12-992F-EF6993F79244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765E2A3B-3B13-4B12-992F-EF6993F79244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765E2A3B-3B13-4B12-992F-EF6993F79244}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A12FEAFC-3767-4578-9863-03C33D6F4F82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A12FEAFC-3767-4578-9863-03C33D6F4F82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A12FEAFC-3767-4578-9863-03C33D6F4F82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A12FEAFC-3767-4578-9863-03C33D6F4F82}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
